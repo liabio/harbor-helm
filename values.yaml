@@ -26,8 +26,8 @@ expose:
     commonName: ""
   ingress:
     hosts:
-      core: core.harbor.domain
-      notary: notary.harbor.domain
+      core: test.harbor.xdf.cn
+      notary: notary.test.harbor.xdf.cn
     # set to the type of ingress controller if it has specific requirements.
     # leave as `default` for most ingress controllers.
     # set to `gce` if using the GCE ingress controller
@@ -98,7 +98,7 @@ expose:
 # the IP address of k8s node
 #
 # If Harbor is deployed behind the proxy, set it as the URL of proxy
-externalURL: https://core.harbor.domain
+externalURL: http://test.harbor.xdf.cn
 
 # The internal TLS used for harbor components secure communicating. In order to enable https
 # in each components tls cert files need to provided in advance.
@@ -189,19 +189,19 @@ persistence:
       # Specify the "storageClass" used to provision the volume. Or the default
       # StorageClass will be used(the default).
       # Set it to "-" to disable dynamic provisioning
-      storageClass: ""
+      storageClass: "rook-cephfs"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
     chartmuseum:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-cephfs"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
     jobservice:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-cephfs"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
@@ -209,7 +209,7 @@ persistence:
     # be ignored
     database:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-cephfs"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
@@ -217,13 +217,13 @@ persistence:
     # be ignored
     redis:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-cephfs"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
     trivy:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-cephfs"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
@@ -693,7 +693,7 @@ database:
 redis:
   # if external Redis is used, set "type" to "external"
   # and fill the connection informations in "external" section
-  type: internal
+  type: external
   internal:
     # set the service account to be used, default if left empty
     serviceAccountName: ""
@@ -718,6 +718,6 @@ redis:
     chartmuseumDatabaseIndex: "3"
     clairAdapterIndex: "4"
     trivyAdapterIndex: "5"
-    password: ""
+    password: "2bxctllr"
   ## Additional deployment annotations
   podAnnotations: {}
